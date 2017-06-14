@@ -7,8 +7,6 @@ Created on 31.05.2017
 @author: p.cretu
 '''
 
-import sys
-sys.path.insert(0, '../../')
 
 class NotAnImageFileError(Exception):
     '''

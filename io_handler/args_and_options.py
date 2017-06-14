@@ -6,11 +6,15 @@ Created on Thu Apr 20 13:52:00 2017
 """
 
 import sys, getopt
+import argparse
 import logging
-import sys
-sys.path.insert(0, '../../')
+import datetime
+from sys import argv
+
 
 logger = logging.getLogger(__name__)
+script_version = '1.0.0'
+
 
 def getArgs(argv):
     '''
@@ -43,7 +47,9 @@ def getArgsFromDirectory(*args):
     inputFiles = ''
     
 def ArgsOptions():
+    current_date = datetime.now().strftime('%Y-%m-%d')
     parser = argparse.ArgumentParser()
+    activities_directory = './' + current_date
 
     # TODO: Implement verbose and/or quiet options.
     # parser.add_argument('-v', '--verbose', help="increase output verbosity", action="store_true")

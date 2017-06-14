@@ -7,11 +7,11 @@ Created on Thu Apr 20 13:52:00 2017
 
 import os
 import logging
-import sys
-sys.path.insert(0, '../../')
+import types
 
 logger = logging.getLogger(__name__)
 
+from decorators.timer import timer
 
 
 class SelfDocumenting():
@@ -51,7 +51,6 @@ class FileManager(SelfDocumenting):
         else:
             raise FileNotFoundError
     
-    
     @property 
     def filePath(self):
         return self._filePath
@@ -88,7 +87,7 @@ class FileManager(SelfDocumenting):
         '''
         return self._filePath.split('\\')[-1]
     
-
+    @timer
     def readFile(self, inFile):
         '''
         text file read
@@ -97,7 +96,8 @@ class FileManager(SelfDocumenting):
             data = f.read()
         f.closed
         return data
-
+    
+    @timer
     def writeFile(self, outFile, data):
         '''
         text file write

@@ -7,13 +7,7 @@ read and write hdf5 files
 '''
 import h5py
 import logging
-import sys, os
-sys.path.insert(0, '../../')
-sys.path.append(os.path.abspath('../..'))
-sys.path.append(os.path.abspath(os.pardir) )
-sys.path.append('C:\\Users\\p.cretu\\Repository\\PythonScripts')
-
-import timer.timer
+from decorators.timer import timer
 
 logger = logging.getLogger(__name__)
 

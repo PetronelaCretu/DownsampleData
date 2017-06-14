@@ -22,7 +22,7 @@ def timer(some_function):
         data = some_function(*args)
         
         endTime = time.monotonic()
-        print(some_function.__qualname__, timedelta(seconds=endTime - startTime))
+        print(some_function.__qualname__, 'execution time: ', timedelta(endTime - startTime), ' seconds')
         return data
     
     return tic_toc

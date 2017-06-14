@@ -8,8 +8,6 @@ Created on 6.06.2017
 '''
 import logging
 from datetime import datetime
-import sys
-sys.path.insert(0, '../../')
 
 from io_handler.file_manager import SelfDocumenting
 
