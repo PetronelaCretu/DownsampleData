@@ -12,7 +12,7 @@ import logging
 
 logger =  logging.getLogger(__name__)
 
-def timer(some_function):
+def tryFunction(some_function):
     """
     wraps a function in a try-except block
     """
