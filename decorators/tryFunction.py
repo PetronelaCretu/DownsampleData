@@ -25,5 +25,6 @@ def tryFunction(some_function):
             print(some_function.__qualname__, e)
             logger.info(some_function.__qualname__)
             logger.info(e)
+            print('blah')
     
     return check
