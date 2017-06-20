@@ -9,7 +9,7 @@ Created on 6.06.2017
 import logging
 from datetime import datetime
 
-from io_handler.file_manager import SelfDocumenting
+from resources.io_handler.file_manager import SelfDocumenting
 
 
 logger = logging.getLogger(__name__)
