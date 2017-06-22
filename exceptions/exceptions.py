@@ -40,3 +40,17 @@ class NotAXMLFileError(Exception):
         self.msg = msg
         super().__init__('NotAXMLFileError: '
                         'the file is not a xml file type: %s' % msg)
+        
+        
+class NotATXTFileError(Exception):
+    
+    '''
+    exception if a file is not a txt file
+    '''
+
+    def __init__(self, msg=None):
+        self.msg = msg
+        super().__init__('NotATXTFileError: '
+                         
+                        'the file is not a txt file type: %s' % msg)
+        
