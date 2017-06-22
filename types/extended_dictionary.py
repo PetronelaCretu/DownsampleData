@@ -20,11 +20,14 @@ class Dictionary():
             self._dict = dict()
     
     @tryFunction
-    def convertValuesToFloat(self, data):
+    def convertValuesToFloat(self):
         '''
-        input: dictionary to validate
-        the dict object will be filled with the converted data
+        the dict object will be copied and refiled with the converted data
         '''
+        from copy import deepcopy
+        data = deepcopy(self._dict)
+        self._dict = {}
+        
         for key in data.keys():
             try:
                 # convert string values to float for a whole array
