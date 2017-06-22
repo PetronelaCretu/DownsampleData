@@ -43,7 +43,6 @@ class NotAXMLFileError(Exception):
         
         
 class NotATXTFileError(Exception):
-    
     '''
     exception if a file is not a txt file
     '''
@@ -51,6 +50,19 @@ class NotATXTFileError(Exception):
     def __init__(self, msg=None):
         self.msg = msg
         super().__init__('NotATXTFileError: '
-                         
                         'the file is not a txt file type: %s' % msg)
+        
+class MissingSamplesDataError(Exception):
+    
+    '''
+    exception if the number of samples in a file is lower than expected
+    '''
+
+    def __init__(self, msg=None):
+        self.msg = msg
+        super().__init__('MissingSamplesDataError: '
+                        'samples missing in the dataset. %s' % msg)
+        
+        
+        
         
