@@ -52,7 +52,8 @@ class NotATXTFileError(Exception):
         super().__init__('NotATXTFileError: '
                         'the file is not a txt file type: %s' % msg)
         
-class MissingSamplesDataError(Exception):
+        
+class CriticalSamplingMissingError(Exception):
     
     '''
     exception if the number of samples in a file is lower than expected
@@ -60,9 +61,8 @@ class MissingSamplesDataError(Exception):
 
     def __init__(self, msg=None):
         self.msg = msg
-        super().__init__('MissingSamplesDataError: '
+        super().__init__('CriticalSamplingMissingError: '
                         'samples missing in the dataset. %s' % msg)
-        
         
         
         
