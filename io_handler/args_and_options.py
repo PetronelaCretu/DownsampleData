@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 script_version = '1.0.0'
 
 
-def getArgs(argv):
+def getArgsOne(argv):
     '''
     function to parse the input arguments from the system and
     handle their utility 
@@ -43,36 +43,40 @@ def getArgs(argv):
     logger.info( 'Output file is "', outputfile)
     return inputfile, outputfile
 
-def getArgsFromDirectory(*args):
-    inputFiles = ''
+
     
-def ArgsOptions():
+def ArgsOptions(script_version, program, description):
     current_date = datetime.now().strftime('%Y-%m-%d')
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description = description,
+                                     prog = program)
     activities_directory = './' + current_date
 
     # TODO: Implement verbose and/or quiet options.
     # parser.add_argument('-v', '--verbose', help="increase output verbosity", action="store_true")
-    parser.add_argument('--version', help="print version and exit", action="store_true")
+    parser.add_argument('-v','--version', help="print version and exit", action="store_true")
+    parser.add_argument('-h','--help', help="show information about teh program and list of program options", action="store_true")
 #     parser.add_argument('--username', help="your Garmin Connect username (otherwise, you will be prompted)", nargs='?')
 #     parser.add_argument('--password', help="your Garmin Connect password (otherwise, you will be prompted)", nargs='?')
     
-    parser.add_argument('-c', '--count', nargs='?', default="1",
-        help="number of recent activities to download, or 'all' (default: 1)")
-    
-    parser.add_argument('-f', '--format', nargs='?', choices=['gpx', 'tcx', 'original'], default="gpx",
-        help="export format; can be 'gpx', 'tcx', or 'original' (default: 'gpx')")
-    
+#     parser.add_argument('-f', '--format', nargs='?', choices=['gpx', 'tcx', 'original'], default="gpx",
+#         help="export format; can be 'gpx', 'tcx', or 'original' (default: 'gpx')")
+    parser.add_argument('directory', nargs = '+')
     parser.add_argument('-d', '--directory', nargs='?', default=activities_directory,
-        help="the directory to export to (default: './YYYY-MM-DD_garmin_connect_export')")
+        help="the data directory (default: './YYYY-MM-DD')")
     
     parser.add_argument('-u', '--unzip',
         help="if downloading ZIP files (format: 'original'), unzip the file and removes the ZIP file",
         action="store_true")
     
-    args = parser.parse_args(script_version = '1.0.0')
+    return parser
+    
+def getArgs(parser):
+    
+    args = parser.parse_args()
     
     if args.version:
         print( argv[0] ) + ", version " + script_version
         exit(0)
+        
+    return args
    

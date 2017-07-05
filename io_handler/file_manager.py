@@ -11,7 +11,7 @@ import types
 
 logger = logging.getLogger(__name__)
 
-from resources.decorators.timer import timer
+from .decorators.timer import timer
 
 
 class SelfDocumenting():

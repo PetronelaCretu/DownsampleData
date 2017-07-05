@@ -4,7 +4,10 @@ Created on 22.06.2017
 @author: p.cretu
 '''
 from decorators.try_function import tryFunction
+from pprint import pprint
 
+import logging
+logger = logging.getLogger()
 
 class Dictionary(dict):
     '''
@@ -27,10 +30,15 @@ class Dictionary(dict):
                 # convert string values to float for a whole array
                 self.update({key:list(map(float, self[key])) })
             except Exception as e: 
-                print(e, 'Error: key ', key , 'in file ', self.fileName, ', array will not be saved', self.fileName, ' has values not valid')
+                print(e, '\tError: key ', key, ' data is not convertable to float')
+                
+                logger.info(self.convertValuesToFloat.__qualname__)
+                logger.info(e)
                 continue
+            
 
-
+    def printDict(self):
+        pprint(self)
 
 
 
