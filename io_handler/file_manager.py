@@ -128,10 +128,13 @@ class FileManager(SelfDocumenting):
                 for name in files:
                     listFiles.append(os.path.join(path, name))
                     
-        logger.info(listFiles)
         return listFiles
         
     
     def getFileName(self, file):
         fileName = file.split('\\')[-1]
         return fileName
+    
+    def printAndLog(self, msg):
+        print(msg)
+        logger.info(msg)
