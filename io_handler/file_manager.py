@@ -7,7 +7,7 @@ Created on Thu Apr 20 13:52:00 2017
 
 import os
 import logging
-import types
+import newTypes
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ class SelfDocumenting():
     @classmethod
     def getMethods( aClass ):
         return [ (n,v.__doc__) for n,v in aClass.__dict__.items()
-                 if type(v) == types.FunctionType ]
+                 if type(v) == newTypes.FunctionType ]
     def help( self ):
         """Part of the self-documenting framework"""
         print(self.getMethods())

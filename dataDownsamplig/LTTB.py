@@ -7,18 +7,7 @@ import numpy
 
 class LTTB(object):
     '''
-    Wrap code in class
-    Numpy implementation of Steinarsson’s 
-    Largest-Triangle-Three-Buckets algorithm 
-    for downsampling time series–like data
-    
-    source: https://github.com/javiljoen/lttb.py
-    
-    version altered!
-
     '''
-
-
     def __init__(self):
         '''
         '''
@@ -73,18 +62,19 @@ class LTTB(object):
             return data
         
         # Validate input
-        if data.shape[1] == 1:
+        if len(data.shape) == 1:
             indexes = numpy.arange(data.shape[0])
-            data = numpy.array(data, indexes)
-        if data.shape[1] > 2:
+            data = numpy.asarray([indexes, data])
+        if len(data.shape) == 2 and data.shape[0]>2:
             raise ValueError('data should have 2 columns')
-    
+        
+        data = data.T
         if any(data[:, 0] != numpy.sort(data[:, 0])):
             raise ValueError('data should be sorted on first column')
 
         if n_out < 3:
             raise ValueError('Can only downsample to a minimum of 3 points')
-    
+        
         # Split data into bins
         n_bins = n_out - 2
         data_bins = numpy.array_split(data[1: len(data) - 1], n_bins)
@@ -117,4 +107,4 @@ class LTTB(object):
             
             
     
-        return out
+        return out.T

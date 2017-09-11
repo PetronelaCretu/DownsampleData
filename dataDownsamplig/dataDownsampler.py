@@ -8,7 +8,7 @@ import pandas
 import numpy
 import logging
 
-from dataDownsamplig import LTTB
+from dataDownsamplig.LTTB import LTTB
 
 class DataDownsampler(object):
     '''
@@ -30,7 +30,7 @@ class DataDownsampler(object):
     def dataFrame(self):
         return self._dataFrame
     
-    @dataFrame.setter()
+    @dataFrame.setter
     def dataFrame(self, dataFrame):
         self._dataFrame = dataFrame
         
@@ -39,7 +39,7 @@ class DataDownsampler(object):
     def dict(self):
         return self._dict
     
-    @dict.setter()
+    @dict.setter
     def dict(self, dict):
         self._dict = dict
         
@@ -48,7 +48,7 @@ class DataDownsampler(object):
     def nArray(self):
         return self._nArray
     
-    @nArray.setter()
+    @nArray.setter
     def nArray(self, nArray):
         self._nArray =  numpy.asarray(nArray)
         pass
@@ -57,7 +57,7 @@ class DataDownsampler(object):
     def resolution(self):
         return self._resolution
     
-    @resolution.setter()
+    @resolution.setter
     def resolution(self, resolution):
         self._resolution = resolution
         pass
@@ -66,13 +66,13 @@ class DataDownsampler(object):
         '''
         '''
         if self._dataFrame is not None:
-            self._downsampleDataFrame('_downsampleDataLTTBnarray')
-            
+            a = self._downsampleDataFrame('_downsampleDataLTTBnarray')
+            return a
         elif self._dict is not None:
-            self._downsampleDataDict('_downsampleDataLTTBnarray')
+            return self._downsampleDataDict('_downsampleDataLTTBnarray')
             
         elif self._nArray is not None:
-            self._downsampleDataLTTBnarray()
+            return self._downsampleDataLTTBnarray()
             
             
                         
@@ -88,28 +88,28 @@ class DataDownsampler(object):
     
     def _downsampleDataLTTBnarray(self):
         '''
-        Apply the Steinarsson’s 
+        Apply the Steinarsson 
         Largest-Triangle-Three-Buckets algorithm.
         
-        **return**: numpy array length 2xresolution (class attribute)
-        
+        **return**: numpy array length 2 x resolution (class attribute)
         '''
         
         lttb = LTTB()
-        lttb.downsample(self.nArray, self.resolution)
-    
+        out = lttb.downsample(self.nArray, self.resolution)
+        
+        return out[1]
     
     def downsampleDataLlTTB(self):
         '''
         '''
         if self._dataFrame is not None:
-            self._downsampleDataFrame('_downsampleDataLlTTBnarray')
+            return self._downsampleDataFrame('_downsampleDataLlTTBnarray')
             
         elif self._dict is not None:
-            self._downsampleDataDict('_downsampleDataLlTTBnarray')
+            return self._downsampleDataDict('_downsampleDataLlTTBnarray')
             
         elif self._nArray is not None:
-            self._downsampleDataLlTTBnarray()
+            return self._downsampleDataLlTTBnarray()
     
     
     def _downsampleDataLlTTBdf(self):
@@ -130,15 +130,19 @@ class DataDownsampler(object):
     
     def downsampleMinAndMax(self):
         '''
+        Method to downsample data in the _downsampleDataMMnarray
+        method. Here the data to be downsampled is identified and
+        passed further.
+        
         '''
         if self._dataFrame is not None:
-            self._downsampleDataFrame('_downsampleDataMMnarray')
+            return self._downsampleDataFrame('_downsampleDataMMnarray')
             
         elif self._dict is not None:
-            self._downsampleDataDict('_downsampleDataMMnarray')
+            return self._downsampleDataDict('_downsampleDataMMnarray')
             
         elif self._nArray is not None:
-            self._downsampleDataMMnarray()
+            return self._downsampleDataMMnarray()
         
         
     def _downsampleDataMMnarray(self):
@@ -159,10 +163,11 @@ class DataDownsampler(object):
         # find min and max for each bin
         
         minAndMax =  numpy.vstack((numpy.nanmax(container,axis=1), numpy.nanmin(container,axis=1)))
-        dataArray = numpy.ndarray
+        data = list()
         for i in range(minAndMax[0].size):
-            numpy.append(dataArray, minAndMax[0][i])
-            numpy.append(dataArray, minAndMax[1][i])
+            data.append( minAndMax[0][i])
+            data.append( minAndMax[1][i])
+        dataArray = numpy.asarray(data)
         
         return dataArray
     
@@ -190,7 +195,7 @@ class DataDownsampler(object):
         i = 0
         for c in self._dataFrame.columns:
             self.nArray = self._dataFrame[c]
-            data = getattr(self, function)(self.nArray)
+            data = getattr(self, function)()
             newDF.insert(i, c, pandas.Series(data))
             i+=1
         
@@ -218,7 +223,7 @@ class DataDownsampler(object):
             if self.nArray.size <= self._resolution:
                 newDict.update({key: self.nArray})
             else:
-                data = getattr(self, function)(self._dict[key])
+                data = getattr(self, function)()
                 newDict.update({key: data})
             
         return newDict
