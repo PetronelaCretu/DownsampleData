@@ -15,4 +15,5 @@ class Video():
         pass
 
     def makeVideo(self):
-        os.system("C:\\Users\\p.cretu\\Downloads\\ffmpeg-20170601-bd1179e-win64-static\\ffmpeg-20170601-bd1179e-win64-static\\bin\\ffmpeg -f image2 -r 1/1 -i %d.jpg -vcodec mpeg4 -y movie.mp4")
+        path = 'ffmpeg-20170601-bd1179e-win64-static\\bin\\ffmpeg'
+        os.system(path + " -f image2 -r 1/1 -i %d.jpg -vcodec mpeg4 -y movie.mp4")
