@@ -14,7 +14,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         iohdf5 = IOHDF5()
-        file = '\\\\mclserver3\\MCL Projekte\\nk153 (CHIP)\\05 (WP5 Prozessdatenanalyse und Korr)\\Arbeitsordner\\Sanity Checks_ HDF5\\Chip files\\SpikeData_V2_B002_011.h5'
+        file = 'SpikeData_V2_B002_011.h5'
         self.dDict = iohdf5.readHDF5ToDict(file)
         self.df = iohdf5.dictToDataFrame(self.dDict)
         self.dataDownsampler = DataDownsampler()
